@@ -1,3 +1,5 @@
+// Partendo dal markup della versione svolta in js plain, rifare lo slider ma questa volta usando Vue.
+
 const app = new Vue(
     {
         el: '#root',
@@ -29,10 +31,29 @@ const app = new Vue(
                     text: 'Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam,',
                 },  
             ],
+            currentSlide: 0,
+            
         },
 
         methods: {
-            
+            nextSlide: function() {
+                if (this.currentSlide === this.thumbs.length - 1) {
+                    this.currentSlide = 0;
+                } else {
+                    this.currentSlide++;
+                }
+            },
+            prevSlide: function() {
+                if (this.currentSlide === 0) {
+                    this.currentSlide = this.thumbs.length - 1;
+                } else {
+                    this.currentSlide--;
+                }
+            },
+            selectedThumb: function(index) {
+                this.currentSlide = index;
+            }
         }
     }
 );
+
