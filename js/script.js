@@ -51,18 +51,21 @@ const app = new Vue(
             selectedThumb: function(index) {
                 this.currentSlide = index;
             },
-            uppone: function() {
-                this.currentSlide++;
+            // 3- quando il mouse va in hover sullo slider, bloccare l'autoplay e farlo riprendere quando esce
+            stopAutoplay: function() {
+                clearInterval(this.autoPlay);
+                this.autoPlay = null;
             },
+            startAutoPlay: function() {
+                this.autoPlay = setInterval(this.nextSlide, 1000);
+            }
         },
+        // 2- applicare l'autoplay allo slider: ogni 3 secondi, cambia immagine automaticamente
         created() {
-            setInterval(() => {
-                this.currentSlide++;
-                if (this.currentSlide === this.thumbs.length) {
-                    this.currentSlide = 0;
-                };
-            }, 3000)
+            startAutoPlay();
         }
     }
 );
+
+
     
