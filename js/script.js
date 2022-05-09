@@ -31,10 +31,8 @@ const app = new Vue(
                     text: 'Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam,',
                 },  
             ],
-            currentSlide: 0,
-            
+            currentSlide: 0,       
         },
-
         methods: {
             nextSlide: function() {
                 if (this.currentSlide === this.thumbs.length - 1) {
@@ -52,8 +50,19 @@ const app = new Vue(
             },
             selectedThumb: function(index) {
                 this.currentSlide = index;
-            }
+            },
+            uppone: function() {
+                this.currentSlide++;
+            },
+        },
+        created() {
+            setInterval(() => {
+                this.currentSlide++;
+                if (this.currentSlide === this.thumbs.length) {
+                    this.currentSlide = 0;
+                };
+            }, 3000)
         }
     }
 );
-
+    
